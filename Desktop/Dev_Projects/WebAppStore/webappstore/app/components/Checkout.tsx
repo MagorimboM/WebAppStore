@@ -1,13 +1,31 @@
 "use client"
 import React from 'react';
+import react, { useEffect, useState } from 'react'
 import useShareState from '../typescript/useSharedState'
+import PaymentSuccessful from './thankYou';
 
 
 const CheckoutForm = (item: any) => {
 
- 
-    const { sharedState } = useShareState(); 
-    
+   
+    const { sharedState } = useShareState();
+    // calculate total of items in shopping cart
+    let subTotal: number = 0;
+    let Total: number = 0;
+   // if there are items in cart calculate the total price
+    if (sharedState) {
+        sharedState.forEach((cartItem: any) => {
+
+            subTotal += cartItem.price
+
+        });
+    };
+
+    if (subTotal) {
+
+        Total = 8 + subTotal;
+
+    };
 
     return (<div>
 
@@ -105,7 +123,7 @@ const CheckoutForm = (item: any) => {
                     <div className="mt-6 border-t border-b py-2">
                         <div className="flex items-center justify-between">
                             <p className="text-sm font-medium text-gray-900">Subtotal</p>
-                            <p className="font-semibold text-gray-900">$----</p>
+                            <p className="font-semibold text-gray-900">${subTotal}</p>
                         </div>
                         <div className="flex items-center justify-between">
                             <p className="text-sm font-medium text-gray-900">Shipping</p>
@@ -114,10 +132,11 @@ const CheckoutForm = (item: any) => {
                     </div>
                     <div className="mt-6 flex items-center justify-between">
                         <p className="text-sm font-medium text-gray-900">Total</p>
-                        <p className="text-2xl font-semibold text-gray-900">$----</p>
+                        <p className="text-2xl font-semibold text-gray-900">${Total}</p>
                     </div>
                 </div>
                 <button className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">Place Order</button>
+              
             </div>
         </div>
     </div>

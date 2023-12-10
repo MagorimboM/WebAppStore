@@ -31,11 +31,11 @@ const Products = () => {
         const { data, error } = results
         //if the json response has error data let me know
         if (error) {
-            console.log('there is an error', error)
+            console.log('there is an error', error);
         }
         //if the json data and no error has data let me know
         if (data) {
-            console.log('there is no error at all! ', data)
+            console.log('there is no error at all! ', data);
             // reset form fields if there is no issue. 
             event.target.reset();
         };
@@ -45,9 +45,10 @@ const Products = () => {
 
     const [products, setProducts] = useState<any>();
     const [fetchError, setError] = useState<any>();
-    const [cart, setCart] = useState<any>([])
+    const [cart, setCart] = useState<any>([]);
     const {sharedState, updateSharedState } = useShareState();
-
+    // calculate total price:
+    
 
     function addTocart(item: any) {
         setCart([item,...cart])
